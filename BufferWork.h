@@ -5,7 +5,8 @@
 #define BUFFER_MAX_SIZE 10240
 
 
-// Lua block
+// Lua 
+
 //#define if  if(
 //#define then ){
 //#define end }
@@ -14,7 +15,8 @@
 //#define while  while(
 //#define or ||
 //#define and &&
-//
+
+// not good idea
 
 namespace BufWork {
 	

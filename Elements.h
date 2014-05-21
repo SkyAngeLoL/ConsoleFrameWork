@@ -1,9 +1,9 @@
 #include "BufferWork.h"
 #include <string>
 
-#define TEXT_ALIGN_LEFT1 0
-#define TEXT_ALIGN_CENTER1 1
-#define TEXT_ALIGN_RIGHT1 2
+#define TEXT_ALIGN_LEFT 0
+#define TEXT_ALIGN_CENTER 1
+#define TEXT_ALIGN_RIGHT 2
 
 namespace elems {
 
