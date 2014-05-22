@@ -32,20 +32,17 @@ namespace elems {
 		BufWork::point(x1, y1, sim, attr);
 	}
 
-	void Box(int x1, int y1, int x2, int y2, char sim, WORD attr) {
-		int temp;
-		if (x1>x2) {
-			temp = x1;
-			x1 = x2;
-			x2 = temp;
-		}
-		while (x1 <= x2) {
-			Line(x1, y1, x1, y2, sim, attr);
-			x1++;
+	void Box(int x, int y, int w, int h, char sim, WORD attr) {
+		int x2 = x + w;
+		int y2 = y + h;
+
+		while (x <= x2) {
+			Line(x, y, x, y2, sim, attr);
+			x++;
 		}
 	}
 
-	static void textEx(int x, int y, std::string text, WORD attr, int align, bool vertical) {
+	static void TextEx(int x, int y, std::string text, WORD attr, int align, bool vertical) {
 		
 		if(align == 1) {
 			if(vertical) {
@@ -66,15 +63,15 @@ namespace elems {
 		}
 	}
 	
-	static void text(int x, int y, std::string text, WORD attr, int align) {
-		textEx(x, y, text, attr, align, false);
+	static void Text(int x, int y, std::string text, WORD attr, int align) {
+		TextEx(x, y, text, attr, align, false);
 	}
 
-	static void text(int x, int y, std::string text, WORD attr) {
-		textEx(x, y, text, attr, 0, false);
+	static void Text(int x, int y, std::string text, WORD attr) {
+		TextEx(x, y, text, attr, 0, false);
 	}
 
-	static void fill(std::string simbols, WORD attr) {
+	static void Fill(std::string simbols, WORD attr) {
 		const int size = simbols.size();
 		int sim = 0;
 		for(int i = 0; i< (BufWork::size.X * BufWork::size.Y); i++) {
@@ -83,10 +80,27 @@ namespace elems {
 		}
 	}
 
-	static void fillPoints(COORD points[], int count, char sim, WORD attr) {
-		for (int i = 0; i < count; i++) {
-			BufWork::point(points[i], sim, attr);
-		}
-	}
+	//static void fillPoints(COORD points[], int count, char sim, WORD attr) {
+	//	for (int i = 0; i < count; i++) {
+	//		BufWork::point(points[i], sim, attr);
+	//	}
+	//}
 
+	static void FillZone(COORD pos1, COORD pos2, std::string simbols, WORD attr) {
+		const int size = simbols.size();
+		int sim = 0;
+
+		for (int i = pos1.X; i < (pos1.X + pos2.X); i++) {
+			for (int j = pos1.Y; j < (pos1.Y + pos2.Y); j++) {
+				int I = j * BufWork::size.X + i;
+
+				BufWork::point(I, simbols[sim], attr);
+
+				sim = sim < size - 1 ? sim + 1 : 0;
+			}
+		}
+
+
+
+	}
 }
