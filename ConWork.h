@@ -36,5 +36,8 @@ namespace ConWork {
 		SetConsoleCursorInfo(hOut, &cci);
 	}
 
-
+	static void setCursorPos(int x, int y) {
+		const COORD pos = { x, y };
+		SetConsoleCursorPosition(hOut, pos);
+	}
 };
