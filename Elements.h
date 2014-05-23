@@ -33,7 +33,7 @@ namespace elems {
 	}
 
 	void Box(int x, int y, int w, int h, char sim, WORD attr) {
-		int x2 = x + w;
+		int x2 = min(x + w, BufWork::size.X - 1);
 		int y2 = y + h;
 
 		while (x <= x2) {

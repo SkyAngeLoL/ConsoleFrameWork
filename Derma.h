@@ -1,9 +1,10 @@
 #include "Elements.h"
 
+int ShadowColor = 0x0080;
+
 
 class basegui{
 	public:
-
 		basegui() { // Конструктор
 			this->size = { 10, 5 };
 			this->pos = { 1, 1 };
@@ -19,31 +20,21 @@ class basegui{
 		WORD attr;
 };
 
-
-
-class frame : public basegui {
+class panel : public basegui {
 	public:
 
-		frame() { // Конструктор
-			this->title = "Frame";
-			this->titleAttr = 0x000F;
+		panel() { // Конструктор
 			this->shadow = true;
-			this->fillChars = "|L";
 		}
 
 		void draw() {
 			if (shadow) {
-				elems::Box(pos.X + 1, pos.Y + 1, size.X - 1, size.Y - 1, ' ', 0x0080);
+				elems::Box(pos.X + 1, pos.Y + 1, size.X, size.Y, ' ', ShadowColor);
 			}
-			elems::FillZone(pos, size, fillChars, attr);
-			elems::Line(pos.X, pos.Y, pos.X + size.X - 1, pos.Y, ' ', titleAttr);
-			elems::Text(pos.X, pos.Y, title, titleAttr);
+			elems::Box(pos.X, pos.Y, size.X, size.Y, ' ', attr);
 		}
 
 	protected:
-		std::string title;
-		WORD titleAttr;
 		bool shadow;
-		std::string fillChars;
 
 };
