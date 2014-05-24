@@ -33,9 +33,10 @@ namespace elems {
 	}
 
 	void Box(int x, int y, int w, int h, char sim, WORD attr) {
-		int x2 = min(x + w, BufWork::size.X - 1);
-		int y2 = y + h;
-
+		int x2 = min(x + w - 1, BufWork::size.X - 1);
+		int y2 = min(y + h - 1, BufWork::size.Y - 1);
+		x = max(x, 0);
+		y = max(y, 0);
 		while (x <= x2) {
 			Line(x, y, x, y2, sim, attr);
 			x++;
