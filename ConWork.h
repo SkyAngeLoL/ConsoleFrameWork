@@ -1,10 +1,9 @@
 #pragma once
 #include <Windows.h>
 
+#define hOut GetStdHandle(STD_OUTPUT_HANDLE)
 
 namespace ConWork {
-
-	static CONSOLE_SCREEN_BUFFER_INFO csbi;
 	static COORD size;
 
 	static COORD setConsoleSize(int X, int Y) {
@@ -22,22 +21,20 @@ namespace ConWork {
 		Sleep(1);
 		SetConsoleScreenBufferSize(hOut, size); /* Yeees! Double shoot! */
 
-		GetConsoleScreenBufferInfo(hOut, &csbi);
-
 		Sleep(10);
 
 		return size;
 	}
 
 	static void setCursorVisible(bool state) {
-		static CONSOLE_CURSOR_INFO cci;
+		CONSOLE_CURSOR_INFO cci;
 			cci.bVisible = state;
 			cci.dwSize = 1;
 		SetConsoleCursorInfo(hOut, &cci);
 	}
 
 	static void setCursorPos(int x, int y) {
-		const COORD pos = { x, y };
-		SetConsoleCursorPosition(hOut, pos);
+		SetConsoleCursorPosition(hOut, { x, y });
 	}
+
 };
